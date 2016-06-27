@@ -1,9 +1,15 @@
+/*
+ *= require_tree .
+ *= require_self
+ */
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
 .container {
     margin-bottom: 80px;
 }
+
 
 caption {
     font-weight: bold;

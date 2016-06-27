@@ -1,63 +1,64 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>WeeklyRep</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-  <nav class="navbar navbar-default">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#gnavi">
-	<span class="icon-bar"></span>
-	<span class="icon-bar"></span>
-	<span class="icon-bar"></span>
-      </button>
-      <%= link_to 'WeeklyRep', root_path, class: 'navbar-brand' %>
-    </div>
+  <head>
+    <title>WeeklyRep</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
 
-    <div id="gnavi" class="collapse navbar-collapse">
-      <ul class="nav navbar-nav navbar-right">
-	<% if user_signed_in? %>
-	  <% if current_user.group %>
-	    <li><%= link_to current_user.group.name, current_user.group %></li>
-	  <% end %>
-	  <% if current_user.approved %>
-	    <% if current_user.latest_report_published? %>
-	      <% next_draft = current_user.next_draft %>
-	      <% path = next_draft ? edit_weekly_report_path(next_draft) : new_weekly_report_path %>
-	      <li><%= link_to "週報を書く", path %></li>
-	    <% else %>
-	      <% latest_draft = current_user.latest_draft %>
-	      <% path = latest_draft ? edit_weekly_report_path(latest_draft) : new_weekly_report_path %>
-	      <li><%= link_to "週報を書く", path %></li>
-	    <% end %>
-	  <% end %>
-	  <li class="dropdown">
-	    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.name %> <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-	      <li><%= link_to "設定", edit_user_registration_path %></li>
-              <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
-            </ul>
-	  </li>
-	<% else %>
-	  <li><%= link_to "登録", new_user_registration_path %></li>
-	  <li><%= link_to "ログイン", new_user_session_path %></li>
-	<% end %>
-      </ul>
-    </div>
-  </nav>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#gnavi">
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+        </button>
+        <%= link_to 'WeeklyRep', root_path, class: 'navbar-brand' %>
+      </div>
 
-  <div class="container">
-  <% flash.each do |name, msg| %>
-    <div class="alert alert-<%= name == "notice" ? "success" : "danger" %>">
-      <a class="close" data-dismiss="alert">×</a>
-      <%= msg %>
-    </div>
-  <% end %>
+      <div id="gnavi" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+	        <% if user_signed_in? %>
+	          <% if current_user.group %>
+	            <li><%= link_to current_user.group.name, current_user.group %></li>
+	          <% end %>
+	          <% if current_user.approved %>
+	            <% if current_user.latest_report_published? %>
+	              <% next_draft = current_user.next_draft %>
+	              <% path = next_draft ? edit_weekly_report_path(next_draft) : new_weekly_report_path %>
+	              <li><%= link_to "週報を書く", path %></li>
+	            <% else %>
+	              <% latest_draft = current_user.latest_draft %>
+	              <% path = latest_draft ? edit_weekly_report_path(latest_draft) : new_weekly_report_path %>
+	              <li><%= link_to "週報を書く", path %></li>
+	            <% end %>
+	          <% end %>
+	          <li class="dropdown">
+	            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.name %> <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+	              <li><%= link_to "設定", edit_user_registration_path %></li>
+                <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+              </ul>
+	          </li>
+	        <% else %>
+	          <li><%= link_to "登録", new_user_registration_path %></li>
+	          <li><%= link_to "ログイン", new_user_session_path %></li>
+	        <% end %>
+        </ul>
+      </div>
+    </nav>
 
-  <%= yield %>
-  </div>
-</body>
+    <div class="container">
+      <% flash.each do |name, msg| %>
+        <div class="alert alert-<%= name == "notice" ? "success" : "danger" %>">
+          <a class="close" data-dismiss="alert">×</a>
+          <%= msg %>
+        </div>
+      <% end %>
+
+      <%= yield %>
+    </div>
+  </body>
 </html>

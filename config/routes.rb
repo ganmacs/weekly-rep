@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'home/index'
+  get 'do_or_die', to: 'home#do_or_die', as: :do_or_die
+  get 'join_group', to: 'home#join_group', as: :join_group
+
   resources :comments, only: :create
   resources :weekly_reports, except: :index
   patch 'groups/approve_request', to: 'groups#approve_request'
@@ -7,7 +11,6 @@ Rails.application.routes.draw do
   devise_scope :user do
     patch 'users/requests_to_belong', to: 'users/registrations#requests_to_belong'
   end
-  get 'home/index'
   get 'groups/:id/requests', to: 'groups#requests_index', as: :groups_requests
   get 'groups/:group_id/weekly_reports', to: 'weekly_reports#group_index', as: :groups_weekly_reports
   get 'users/:user_id/weekly_reports', to: 'weekly_reports#user_index', as: :users_weekly_reports

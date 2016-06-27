@@ -1,23 +1,9 @@
-<% if @reports.present? %>
-  <table class="table"">
-    <caption><%= link_to current_user.group.name, current_user.group %>の直近の週報(<%= @reports.first.reported_time %>)</caption>
-    <tbody>
-      <% @reports.each do |report| %>
-	<tr>
-	  <td class="gravatar_td"><%= gravatar_for report.user %></td>
-	  <td class="report_content""><%= link_to_users_weekly_reports(report.user) %><br>
-	    <%= link_to report.content, report %></td>
-	  <td class="report_time"><%= report.updated_at %></td>
-	</tr>
-      <% end %>
-    </tbody>
-  </table>
-<% elsif user_signed_in? %>
-  <% if current_user.group.nil? %>
-    <h1 class="text-center"><%= link_to '新しいグループを作る', new_group_path %></h1>
+<div class="report_list">
+  <% if @reports.present? %>
+    <% @reports.each do |report| %>
+      <%= render partial: "report", locals: { report: report } %>
+    <% end  %>
   <% else %>
     <h1 class="text-center"><%= link_to '週報を書こう！', new_weekly_report_path %></h1>
   <% end %>
-<% else %>
-  <h1 class="text-center index-links"><%= link_to "登録", new_user_registration_path %> or <%= link_to "ログイン", new_user_session_path %> or <%= link_to "die", 'https://www.google.co.jp/search?q=%E8%87%AA%E6%AE%BA+%E5%90%8D%E6%89%80&oq=%E8%87%AA%E6%AE%BA+%E5%90%8D%E6%89%80&aqs=chrome..69i57.2318j0j1&sourceid=chrome&ie=UTF-8' %></h1>
-<% end %>
+</div>
