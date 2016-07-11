@@ -6,14 +6,22 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+body {
+  height: 100%;
+  background: #fafafa!important;
+}
+
 .container {
   max-width: 1000px;
 }
 
-.nav_restrict {
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
+.navbar {
+  background: #fff;
+  border-color: rgba(0, 0, 0, .05);
+}
+
+a.user_name {
+    color: #777777;
 }
 
 caption {
@@ -78,12 +86,17 @@ textarea {
 }
 
 .report_list {
-  border: 1px solid #e8e8e8;
-  padding: 30px;
-
   .report_element {
+    border-radius: 3px;
+    padding: 20px 25px;
+    background-color: #fff;
+    margin-top: 15px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .04);
+    border: 1px solid rgba(0, 0, 0, .09);
     width: 100%;
     display: block;
+    word-wrap:break-word;
+
 
     .user_icon {
       width: 40px;
@@ -91,20 +104,24 @@ textarea {
       float: left;
     }
 
-    .report_body  {
+    .report_header {
       margin-left: 49px;
+      height: 50px;
 
-      .report_title {
-        margin-top: -1px;
-        font-weight: bold;
-        font-size: 18px;
-        width: 100%;
+      .report_user_name {
+        color: #02b875;
+      }
+
+      .report_time {
+        font-size: 12px;
+        color: #777
       }
     }
-  }
-  .report_element:not(:first-child) {
-    border-top: 1px solid #e8e8e8;
-    padding-top: 8px;
-    margin-top: 8px;
+
+    .report_content {
+      height: 100px;
+      overflow:hidden;
+      color: #222;
+    }
   }
 }

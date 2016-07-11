@@ -1,8 +1,13 @@
 <div class="report_element">
   <div class="user_icon"><%= gravatar_for report.user, 40 %></div>
 
+  <div class="report_header">
+    <div class="report_name"><%= link_to report.user.name, users_weekly_reports_path(report.user), class: :report_user_name %></div>
+    <div class="report_time"><%=  report.updated_at  %></div>
+  </div>
+
   <div class="report_body">
-    <div class="report_user"><%= link_to_users_weekly_reports(report.user) %></div>
-    <div class="report_title"><%= link_to report.reported_time.to_s(:report_title) + 'の週報', report %></div>
+    <%= link_to report.reported_time.to_s(:report_title) + 'の週報', report %>
+    <%= link_to Qiita::Markdown::Processor.new.call(report.content)[:output].to_s.html_safe(), class: :report_content %>
   </div>
 </div>

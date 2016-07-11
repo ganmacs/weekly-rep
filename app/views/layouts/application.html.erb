@@ -8,17 +8,18 @@
   </head>
 
   <body>
-    <%= render partial: 'layouts/nav' %>
+    <div id="bodyBase">
+      <%= render partial: 'layouts/nav' %>
+      <div class="container">
+        <% flash.each do |name, msg| %>
+          <div class="alert alert-<%= name == "notice" ? "success" : "danger" %>">
+            <a class="close" data-dismiss="alert">×</a>
+            <%= msg %>
+          </div>
+        <% end %>
 
-    <div class="container">
-      <% flash.each do |name, msg| %>
-        <div class="alert alert-<%= name == "notice" ? "success" : "danger" %>">
-          <a class="close" data-dismiss="alert">×</a>
-          <%= msg %>
-        </div>
-      <% end %>
-
-      <%= yield %>
+        <%= yield %>
+      </div>
     </div>
   </body>
 </html>

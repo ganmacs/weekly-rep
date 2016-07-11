@@ -3,8 +3,8 @@ class HomeController < ApplicationController
   before_action :validate_user!, only: [:index]
 
   def index
-    @reports = current_user.group.weekly_reports.where(published: true).includes(:user)
-    @reports = @reports.where('reported_time > ?', 1.week.ago).order('updated_at DESC')
+    @reports = current_user.group.weekly_reports.includes(:user)
+    @reports = @reports.order('updated_at DESC')
     @group_members = current_user.group.users
   end
 
